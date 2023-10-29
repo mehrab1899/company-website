@@ -1,53 +1,51 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom"; // If you are using React Router
+import { Link } from "react-router-dom";
+import CustomLink from "../components/Link";
+import { withStyles, WithStyles } from "@mui/styles";
+const styles = (theme: any) => ({
+  transparentBar: {
+    backgroundColor: "transparent !important",
+    boxShadow: "none !important",
+    border: "1px solid red",
+    color: "#FFFFFF",
+  },
+});
 
-const Header: React.FC = () => {
+interface HeaderProps extends WithStyles<typeof styles> {}
+
+const Header: React.FC<HeaderProps> = (props) => {
+  const { classes } = props;
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.transparentBar}>
       <Toolbar>
-        <Typography
-          variant="h6"
-          component={Link}
-          to="/"
-          style={{ flexGrow: 1 }}
-        >
-          <img
-            src="logo.png"
-            alt="Company Logo"
-            style={{ marginRight: "10px" }}
-          />
-          Company Name
-        </Typography>
+        <img src="" alt="Company Logo" style={{ marginRight: "10px" }} />
         <div className="nav-links">
-          <Button component={Link} to="/link1" color="inherit">
-            Link 1
-          </Button>
-          <Button component={Link} to="/link2" color="inherit">
-            Link 2
-          </Button>
-          <Button component={Link} to="/link3" color="inherit">
-            Link 3
-          </Button>
-          <Button component={Link} to="/link4" color="inherit">
-            Link 4
-          </Button>
-          <Button component={Link} to="/link5" color="inherit">
-            Link 5
-          </Button>
-          <Button component={Link} to="/link6" color="inherit">
-            Link 6
-          </Button>
+          <CustomLink url="https://example.com" color="#6aaeba">
+            Home
+          </CustomLink>
+          <CustomLink url="https://openai.com" color="#6aaeba">
+            Why Us
+          </CustomLink>
+          <CustomLink url="https://openai.com" color="#6aaeba">
+            Services{" "}
+          </CustomLink>
+          <CustomLink url="https://openai.com" color="#6aaeba">
+            Tech Stack
+          </CustomLink>
+          <CustomLink url="https://openai.com" color="#6aaeba">
+            Our Work
+          </CustomLink>
           <Button
             component={Link}
             to="/button"
             variant="contained"
             color="primary"
           >
-            Button
+            Get a Quote
           </Button>
         </div>
       </Toolbar>
@@ -55,4 +53,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default withStyles(styles)(Header);
